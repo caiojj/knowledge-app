@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Knowledge</string>
+    <string name="email">E-mail</string>
+    <string name="password">Senha</string>
+    <string name="login">Entrar</string>
+    <string name="image_student">Imagem de um estudante</string>
+    <string name="forgot_password">Esqueceu sua senha?</string>
+    <string name="new_user">Novo por aqui?</string>
+    <string name="create_account">Criar conta</string>
+</resources>
