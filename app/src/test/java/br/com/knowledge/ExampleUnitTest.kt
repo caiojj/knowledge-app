@@ -1,4 +1,4 @@
-package br.com.knowleged
+package br.com.knowledge
 
 import org.junit.Test
 
