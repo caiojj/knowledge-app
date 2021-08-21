@@ -9,5 +9,8 @@
     <string name="create_account">Criar conta</string>
     <string name="name">Nome</string>
     <string name="confirm_password">Confirmar senha</string>
-    <string name="signup">Cadastrar-se</string>
+    <string name="signup">Cadastrar</string>
+    <string name="text_forgot_password">Para redefinir sua senha, informe o usuário ou email cadastrado na sua conta e lhe enviaremos um link com as instruções.</string>
+    <string name="enviar_e_mail">Enviar e-mail</string>
+    <string name="usuario_email">Usuário ou E-mail</string>
 </resources>

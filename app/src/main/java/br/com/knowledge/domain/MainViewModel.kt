@@ -28,7 +28,7 @@ class MainViewModel(
                     _state.value = State.Loading
                 }
                 .catch {
-                    _state.value = State.Error(it.localizedMessage)
+                    _state.value = State.Error(it.message)
                 }
                 .collect {
                     _state.value = State.Logged(it)
@@ -39,6 +39,6 @@ class MainViewModel(
     sealed class State {
         object Loading: State()
         data class Logged(val body: ResponseLogin): State()
-        data class Error(val error: String) : State()
+        data class Error(val error: String?) : State()
     }
 }

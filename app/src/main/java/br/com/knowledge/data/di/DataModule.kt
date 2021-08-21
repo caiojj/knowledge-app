@@ -15,6 +15,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object DataModule {
+    private const val BASE_URL_EMULADOR = "http://10.0.2.2:4000"
+    private const val BASE_URL_MOTOG = "http://192.168.15.10:4000"
     private const val HTTP_TAG = "okHTTP"
 
     fun load() {
@@ -56,7 +58,7 @@ object DataModule {
     private inline fun <reified T> createService(client: OkHttpClient, factory: GsonConverterFactory): T {
         return Retrofit
             .Builder()
-            .baseUrl("http://10.0.2.2:4000")
+            .baseUrl(BASE_URL_MOTOG)
             .client(client)
             .addConverterFactory(factory)
             .build()

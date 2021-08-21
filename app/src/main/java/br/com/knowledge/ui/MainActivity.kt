@@ -8,7 +8,6 @@ import br.com.knowledge.core.extensions.createProgressDialog
 import br.com.knowledge.core.extensions.hideSoftKeyboard
 import br.com.knowledge.data.module.Login
 import br.com.knowledge.databinding.ActivityMainBinding
-
 import br.com.knowledge.domain.MainViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -57,7 +56,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.cpForgotPassword.setOnClickListener {
-
+            val intent = Intent(this, ForgotPasswordActivity::class.java)
+            startActivity(intent)
         }
 
         binding.tvCreateAccounter.setOnClickListener {
