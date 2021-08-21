@@ -1,7 +1,7 @@
 package br.com.knowledge.data.repository
 
 import android.os.RemoteException
-import android.util.Log
+import br.com.knowledge.data.module.AccountData
 import br.com.knowledge.data.module.ErrorResponse
 import br.com.knowledge.data.module.Login
 import br.com.knowledge.data.services.LoginServices
@@ -21,6 +21,17 @@ class KnowledgeRepositoryImp(
             val json = e.response()?.errorBody()?.toString()
             val errorResponse = Gson().fromJson(json, ErrorResponse::class.java)
             throw RemoteException(errorResponse.message)
+        }
+    }
+
+    override suspend fun createAccount(dataAccount: AccountData) = flow {
+        try {
+            val responseCreateAccount = service.createAccount(dataAccount)
+            emit(responseCreateAccount)
+        } catch(e: HttpException) {
+            val json = e.response()?.errorBody()?.toString()
+            val errorResponse = Gson().fromJson(json, ErrorResponse::class.java)
+            throw  RemoteException(errorResponse.message)
         }
     }
 }

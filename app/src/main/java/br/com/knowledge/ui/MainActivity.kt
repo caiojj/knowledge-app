@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
                 is MainViewModel.State.Error -> {
                     dialog.dismiss()
                     createDialog {
-                        setMessage("Erro aqui ${it.error.message}")
+                        setMessage("${it}")
                     }.show()
                 }
             }
@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.tvCreateAccounter.setOnClickListener {
-            val intent = Intent(this@MainActivity, CreateAccounterActivity::class.java)
+            val intent = Intent(this@MainActivity, CreateAccountActivity::class.java)
             startActivity(intent)
         }
     }
