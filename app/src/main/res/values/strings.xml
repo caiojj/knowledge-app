@@ -7,4 +7,7 @@
     <string name="forgot_password">Esqueceu sua senha?</string>
     <string name="new_user">Novo por aqui?</string>
     <string name="create_account">Criar conta</string>
+    <string name="name">Nome</string>
+    <string name="confirm_password">Confirmar senha</string>
+    <string name="signup">Cadastrar-se</string>
 </resources>

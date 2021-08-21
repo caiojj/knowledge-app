@@ -22,10 +22,9 @@
 
     <ImageView
         android:id="@+id/iv_learning"
-        android:layout_width="0dp"
-        android:layout_height="190dp"
-        tools:layout_editor_absoluteX="1dp"
         android:src="@drawable/ic_learning"
+        android:layout_width="0dp"
+        android:layout_height="240dp"
         android:contentDescription="@string/image_student"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,7 +34,6 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cv_login"
         app:cardCornerRadius="10dp"
-        android:layout_margin="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -51,7 +49,7 @@
                 android:id="@+id/til_email"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 app:startIconDrawable="@drawable/ic_user"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="16dp"
                 android:hint="@string/email"
                 android:layout_width="match_parent"
                 android:layout_gravity="center"
@@ -70,10 +68,11 @@
                 android:id="@+id/til_password"
                 android:layout_marginHorizontal="8dp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="16dp"
                 app:startIconDrawable="@drawable/password"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:hint="@string/password"
+                app:passwordToggleEnabled="true"
                 android:layout_width="match_parent"
                 android:layout_gravity="center"
                 android:layout_height="wrap_content">
@@ -124,7 +123,7 @@
         android:text="@string/new_user"/>
 
     <TextView
-        android:id="@+id/tv_create_account"
+        android:id="@+id/tv_create_accounter"
         android:padding="5dp"
         android:text="@string/create_account"
         android:textStyle="bold"
