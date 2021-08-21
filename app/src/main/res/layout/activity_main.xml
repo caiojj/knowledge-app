@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ui.MainActivity">
 
     <TextView
         android:id="@+id/tv_knowledge"
@@ -60,6 +60,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/tie_email"
+                    android:inputType="textEmailAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
@@ -79,6 +80,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/tie_password"
+                    android:inputType="textPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
@@ -91,6 +93,7 @@
                 android:orientation="horizontal">
 
                 <com.google.android.material.chip.Chip
+                    android:id="@+id/cp_forgot_password"
                     android:clickable="false"
                     android:backgroundTint="@color/white"
                     android:layout_width="wrap_content"
