@@ -1,18 +1,18 @@
 package br.com.knowledge.data.repository
 
-import br.com.knowledge.data.module.AccountData
-import br.com.knowledge.data.module.ActiveUser
-import br.com.knowledge.data.module.Login
-import br.com.knowledge.data.module.ResponseLogin
+import br.com.knowledge.data.model.*
 import kotlinx.coroutines.flow.Flow
+import okhttp3.Authenticator
 import retrofit2.Response
 
 
 interface KnowledgeRepository {
 
-    suspend fun login(login: Login): Flow<ResponseLogin>
+    suspend fun login(requestLogin: RequestLogin): Flow<Response<ResponseLogin>>
 
     suspend fun createAccount(accountData: AccountData): Flow<Response<Void>>
+
+    suspend fun getArticles(token: String) : Flow<Response<ResponseArticles>>
 
     suspend fun findAll(): Flow<List<ActiveUser>>
 

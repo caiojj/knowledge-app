@@ -1,4 +1,4 @@
-package br.com.knowledge.data.module
+package br.com.knowledge.data.model
 
 data class ResponseLogin(
     val id: Long,

@@ -4,6 +4,8 @@ import android.util.Log
 import br.com.knowledge.data.database.AppDataBase
 import br.com.knowledge.data.repository.KnowledgeRepository
 import br.com.knowledge.data.repository.KnowledgeRepositoryImp
+import br.com.knowledge.data.services.ArticlesServices
+import br.com.knowledge.data.services.CreateAccountServices
 import br.com.knowledge.data.services.LoginServices
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
@@ -35,7 +37,7 @@ object DataModule {
     private fun repositoryModule(): Module {
         return module {
             single<KnowledgeRepository> {
-                KnowledgeRepositoryImp(get(), get())
+                KnowledgeRepositoryImp(get(), get(), get(), get())
             }
         }
     }
@@ -47,7 +49,6 @@ object DataModule {
                     Log.e(HTTP_TAG, "$it")
                 }
                 interceptor.level = HttpLoggingInterceptor.Level.BODY
-
                 OkHttpClient
                     .Builder()
                     .addInterceptor(interceptor)
@@ -60,6 +61,14 @@ object DataModule {
 
             single {
                 createService<LoginServices>(get(), get())
+            }
+
+            single {
+                createService<CreateAccountServices>(get(), get())
+            }
+
+            single {
+                createService<ArticlesServices>(get(), get())
             }
         }
     }

@@ -1,7 +1,7 @@
 package br.com.knowledge.domain
 
 import br.com.knowledge.core.UseCase
-import br.com.knowledge.data.module.ActiveUser
+import br.com.knowledge.data.model.ActiveUser
 import br.com.knowledge.data.repository.KnowledgeRepository
 import kotlinx.coroutines.flow.Flow
 

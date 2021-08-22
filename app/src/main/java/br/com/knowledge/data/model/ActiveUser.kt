@@ -1,4 +1,4 @@
-package br.com.knowledge.data.module
+package br.com.knowledge.data.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

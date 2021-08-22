@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import br.com.knowledge.data.model.AccountData
-import br.com.knowledge.domain.CreateAccountUseCase
+import br.com.knowledge.data.model.ResponseArticles
+import br.com.knowledge.domain.GetArticlesUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
@@ -14,16 +14,17 @@ import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
-class CreateAccountViewModel(
-    private val createAccountUseCase: CreateAccountUseCase
+class ArticlesViewModel(
+private val getArticlesUseCase: GetArticlesUseCase
 ) : ViewModel() {
 
     private val _state = MutableLiveData<State>()
     val state: LiveData<State> = _state
 
-    fun createAccount(accountData: AccountData) {
+
+    fun getArticles(token: String) {
         viewModelScope.launch {
-            createAccountUseCase(accountData)
+            getArticlesUseCase(token)
                 .flowOn(Dispatchers.Main)
                 .onStart {
                     _state.value = State.Loading
@@ -36,10 +37,10 @@ class CreateAccountViewModel(
                 }
         }
     }
+}
 
-    sealed class State() {
-        object Loading : State()
-        data class Success(val msg: Response<Void>) : State()
-        data class Error(val error: Throwable) : State()
-    }
+sealed class State {
+    object Loading : State()
+    data class Success(val articles: Response<ResponseArticles>) : State()
+    data class Error(val error: Throwable) : State()
 }

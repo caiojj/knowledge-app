@@ -18,6 +18,7 @@ object DomainModule {
             factory { GetActiveUserUseCase(get()) }
             factory { SaveActiveUserUseCase(get()) }
             factory { DeleteActiveUserUseCase(get()) }
+            factory { GetArticlesUseCase(get()) }
         }
     }
 }

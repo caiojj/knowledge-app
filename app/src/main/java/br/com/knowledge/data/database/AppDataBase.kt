@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import br.com.knowledge.data.database.dao.ActiveUserDao
-import br.com.knowledge.data.module.ActiveUser
+import br.com.knowledge.data.model.ActiveUser
 
 @Database(entities = [ActiveUser::class], version = 1)
 abstract class AppDataBase : RoomDatabase() {

@@ -1,12 +1,10 @@
 package br.com.knowledge.ui
 
-import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import br.com.knowledge.R
 import br.com.knowledge.core.extensions.createDialog
 import br.com.knowledge.core.extensions.createProgressDialog
-import br.com.knowledge.data.module.AccountData
+import br.com.knowledge.data.model.AccountData
 import br.com.knowledge.databinding.ActivityCreateAccountBinding
 import br.com.knowledge.presentation.CreateAccountViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel

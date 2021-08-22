@@ -2,26 +2,28 @@ package br.com.knowledge.data.repository
 
 import android.os.RemoteException
 import br.com.knowledge.data.database.AppDataBase
-import br.com.knowledge.data.module.AccountData
-import br.com.knowledge.data.module.ActiveUser
-import br.com.knowledge.data.module.ErrorResponse
-import br.com.knowledge.data.module.Login
+import br.com.knowledge.data.model.*
+import br.com.knowledge.data.services.ArticlesServices
+import br.com.knowledge.data.services.CreateAccountServices
 import br.com.knowledge.data.services.LoginServices
 import com.google.gson.Gson
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import okhttp3.Authenticator
 import retrofit2.HttpException
 
 class KnowledgeRepositoryImp(
     private val appDataBase: AppDataBase,
-    private val service: LoginServices
+    private val loginServices: LoginServices,
+    private val createAccountService: CreateAccountServices,
+    private val articles: ArticlesServices
 ) : KnowledgeRepository {
 
     private val dao = appDataBase.activeUserDao()
 
-    override suspend fun login(login: Login) = flow {
+    override suspend fun login(requestLogin: RequestLogin) = flow {
         try {
-            val responseLogin = service.login(login)
+            val responseLogin = loginServices.login(requestLogin)
             emit(responseLogin)
         } catch(e: HttpException) {
             val json = e.response()?.errorBody()?.toString()
@@ -32,12 +34,23 @@ class KnowledgeRepositoryImp(
 
     override suspend fun createAccount(accountData: AccountData) = flow {
         try {
-            val responseCreateAccount = service.createAccount(accountData)
+            val responseCreateAccount = createAccountService.createAccount(accountData)
             emit(responseCreateAccount)
         } catch(e: HttpException) {
             val json = e.response()?.errorBody()?.toString()
             val errorResponse = Gson().fromJson(json, ErrorResponse::class.java)
             throw  RemoteException(errorResponse.message)
+        }
+    }
+
+    override suspend fun getArticles(token: String) = flow {
+        try {
+            val responseArticles = articles.getArticles(token)
+            emit(responseArticles)
+        } catch (e: HttpException) {
+            val json = e.response()?.errorBody()?.toString()
+            val errorResponseArticles = Gson().fromJson(json, ErrorResponse::class.java)
+            throw RemoteException(errorResponseArticles.message)
         }
     }
 

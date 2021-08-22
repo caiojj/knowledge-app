@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import br.com.knowledge.data.module.ActiveUser
-import br.com.knowledge.data.module.Login
-import br.com.knowledge.data.module.ResponseLogin
+import br.com.knowledge.data.model.ActiveUser
+import br.com.knowledge.data.model.RequestLogin
+import br.com.knowledge.data.model.ResponseLogin
 import br.com.knowledge.domain.ResponseLoginUseCase
 import br.com.knowledge.domain.SaveActiveUserUseCase
 import kotlinx.coroutines.Dispatchers
@@ -15,6 +15,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
+import retrofit2.Response
 
 class MainViewModel(
     private val saveActiveUserUseCase: SaveActiveUserUseCase,
@@ -24,9 +25,9 @@ class MainViewModel(
     private val _state = MutableLiveData<State>()
     val state: LiveData<State> = _state
 
-    fun executeLogin(login: Login) {
+    fun executeLogin(requestLogin: RequestLogin) {
         viewModelScope.launch {
-            responseLoginUseCase(login)
+            responseLoginUseCase(requestLogin)
                 .flowOn(Dispatchers.Main)
                 .onStart {
                     _state.value = State.Loading
@@ -59,9 +60,7 @@ class MainViewModel(
     sealed class State {
         object Loading: State()
         object Saved: State()
-        object Deleted: State()
-        data class ListSuccess (val list: List<ActiveUser>) : State()
-        data class Logged(val body: ResponseLogin): State()
+        data class Logged(val body: Response<ResponseLogin>): State()
         data class Error(val error: String?): State()
     }
 }

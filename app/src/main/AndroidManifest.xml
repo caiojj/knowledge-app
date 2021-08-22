@@ -13,6 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Knowleged">
         <activity
+            android:name=".ui.SplashScreenActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.ArticlesActivity"
+            android:exported="true" />
+        <activity
             android:name=".ui.ForgotPasswordActivity"
             android:exported="true" />
         <activity

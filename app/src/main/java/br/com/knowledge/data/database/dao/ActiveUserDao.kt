@@ -1,7 +1,7 @@
 package br.com.knowledge.data.database.dao
 
 import androidx.room.*
-import br.com.knowledge.data.module.ActiveUser
+import br.com.knowledge.data.model.ActiveUser
 import kotlinx.coroutines.flow.Flow
 
 @Dao

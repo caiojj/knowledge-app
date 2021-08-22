@@ -3,11 +3,10 @@ package br.com.knowledge.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import br.com.knowledge.core.extensions.createDialog
 import br.com.knowledge.core.extensions.createProgressDialog
 import br.com.knowledge.core.extensions.hideSoftKeyboard
-import br.com.knowledge.data.module.Login
+import br.com.knowledge.data.model.RequestLogin
 import br.com.knowledge.databinding.ActivityMainBinding
 import br.com.knowledge.presentation.MainViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -32,30 +31,26 @@ class MainActivity : AppCompatActivity() {
                 MainViewModel.State.Loading -> dialog.show()
                 is MainViewModel.State.Logged -> {
                     dialog.dismiss()
-                    createDialog {
-                        setMessage("Login bem sucedido ${it.body.name}")
-                    }.show()
+                    if (it.body.isSuccessful) {
+                        val intent = Intent(this, ArticlesActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    } else {
+                        createDialog {
+                            setMessage("${it.body.errorBody()?.charStream()?.readText()}")
+                        }.show()
+                    }
                 }
                 is MainViewModel.State.Error -> {
                     dialog.dismiss()
                     createDialog {
-                        setMessage("${it}")
+                        setMessage("${it.error}")
                     }.show()
                 }
                 MainViewModel.State.Saved -> {
                     dialog.dismiss()
                     createDialog {
                         setMessage("Contéudo savo com sucesso.")
-                    }
-                }
-                is MainViewModel.State.ListSuccess -> {
-                    dialog.dismiss()
-                    Log.e("Database", "${it.list}")
-                }
-                MainViewModel.State.Deleted -> {
-                    dialog.dismiss()
-                    createDialog {
-                        setMessage("Excluido com sucesso")
                     }
                 }
             }
@@ -68,7 +63,7 @@ class MainActivity : AppCompatActivity() {
             it.hideSoftKeyboard()
             val email = binding.tieEmail.text.toString()
             val password = binding.tiePassword.text.toString()
-            val login = Login(email, password)
+            val login = RequestLogin(email, password)
             viewModel.executeLogin(login)
         }
 
