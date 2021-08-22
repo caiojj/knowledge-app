@@ -7,8 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.MainActivity">
 
-
-
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cv_login"
         android:layout_marginHorizontal="5dp"

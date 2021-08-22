@@ -9,12 +9,14 @@
         <entry key="app/src/main/res/drawable-v24/ic_profile.xml" value="0.19907407407407407" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.2235897435897436" />
         <entry key="app/src/main/res/drawable/ic_learning.xml" value="0.22708333333333333" />
+        <entry key="app/src/main/res/drawable/ic_learning_3.xml" value="0.19907407407407407" />
         <entry key="app/src/main/res/drawable/ic_user.xml" value="0.22708333333333333" />
         <entry key="app/src/main/res/drawable/password.xml" value="0.22708333333333333" />
         <entry key="app/src/main/res/layout/activity_articles.xml" value="0.30925925925925923" />
         <entry key="app/src/main/res/layout/activity_create_accounter.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_forgot_password.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.5" />
         <entry key="app/src/main/res/layout/item_article.xml" value="0.33" />
         <entry key="app/src/main/res/menu/bottom_navigation_menu.xml" value="0.22" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_banner.xml" value="0.11666666666666667" />
