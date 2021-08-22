@@ -1,13 +1,14 @@
 package br.com.knowledge.data.di
 
 import android.util.Log
+import br.com.knowledge.data.database.AppDataBase
 import br.com.knowledge.data.repository.KnowledgeRepository
 import br.com.knowledge.data.repository.KnowledgeRepositoryImp
 import br.com.knowledge.data.services.LoginServices
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
-import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.android.ext.koin.androidApplication
 import org.koin.core.context.loadKoinModules
 import org.koin.core.module.Module
 import org.koin.dsl.module
@@ -20,13 +21,21 @@ object DataModule {
     private const val HTTP_TAG = "okHTTP"
 
     fun load() {
-        loadKoinModules(networkModule() + repositoryModule())
+        loadKoinModules(networkModule() + repositoryModule() + databaseModule())
+    }
+
+    private fun databaseModule(): Module {
+        return module {
+            single {
+                AppDataBase.getInstance(androidApplication())
+            }
+        }
     }
 
     private fun repositoryModule(): Module {
         return module {
             single<KnowledgeRepository> {
-                KnowledgeRepositoryImp(get())
+                KnowledgeRepositoryImp(get(), get())
             }
         }
     }

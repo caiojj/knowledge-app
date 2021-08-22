@@ -3,12 +3,13 @@ package br.com.knowledge.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import br.com.knowledge.core.extensions.createDialog
 import br.com.knowledge.core.extensions.createProgressDialog
 import br.com.knowledge.core.extensions.hideSoftKeyboard
 import br.com.knowledge.data.module.Login
 import br.com.knowledge.databinding.ActivityMainBinding
-import br.com.knowledge.domain.MainViewModel
+import br.com.knowledge.presentation.MainViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
@@ -40,6 +41,22 @@ class MainActivity : AppCompatActivity() {
                     createDialog {
                         setMessage("${it}")
                     }.show()
+                }
+                MainViewModel.State.Saved -> {
+                    dialog.dismiss()
+                    createDialog {
+                        setMessage("Contéudo savo com sucesso.")
+                    }
+                }
+                is MainViewModel.State.ListSuccess -> {
+                    dialog.dismiss()
+                    Log.e("Database", "${it.list}")
+                }
+                MainViewModel.State.Deleted -> {
+                    dialog.dismiss()
+                    createDialog {
+                        setMessage("Excluido com sucesso")
+                    }
                 }
             }
         }

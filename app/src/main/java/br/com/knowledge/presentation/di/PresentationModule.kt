@@ -1,6 +1,6 @@
 package br.com.knowledge.presentation.di
 
-import br.com.knowledge.domain.MainViewModel
+import br.com.knowledge.presentation.MainViewModel
 import br.com.knowledge.presentation.CreateAccountViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.context.loadKoinModules
@@ -15,7 +15,7 @@ object PresentationModule {
 
     private fun viewModelModules(): Module {
         return module {
-            viewModel { MainViewModel(get()) }
+            viewModel { MainViewModel(get(), get()) }
             viewModel { CreateAccountViewModel(get()) }
         }
     }

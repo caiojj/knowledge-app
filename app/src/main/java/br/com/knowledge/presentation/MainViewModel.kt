@@ -1,11 +1,14 @@
-package br.com.knowledge.domain
+package br.com.knowledge.presentation
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import br.com.knowledge.data.module.ActiveUser
 import br.com.knowledge.data.module.Login
 import br.com.knowledge.data.module.ResponseLogin
+import br.com.knowledge.domain.ResponseLoginUseCase
+import br.com.knowledge.domain.SaveActiveUserUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
@@ -14,6 +17,7 @@ import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
 class MainViewModel(
+    private val saveActiveUserUseCase: SaveActiveUserUseCase,
     private val responseLoginUseCase: ResponseLoginUseCase
 ) : ViewModel() {
 
@@ -36,9 +40,28 @@ class MainViewModel(
         }
     }
 
+    fun insert(activeUser: ActiveUser) {
+        viewModelScope.launch {
+            saveActiveUserUseCase(activeUser)
+                .flowOn(Dispatchers.Default)
+                .onStart {
+                    _state.value = State.Loading
+                }
+                .catch {
+                    _state.value = State.Error(it.message)
+                }
+                .collect {
+                    _state.value = State.Saved
+                }
+        }
+    }
+
     sealed class State {
         object Loading: State()
+        object Saved: State()
+        object Deleted: State()
+        data class ListSuccess (val list: List<ActiveUser>) : State()
         data class Logged(val body: ResponseLogin): State()
-        data class Error(val error: String?) : State()
+        data class Error(val error: String?): State()
     }
 }

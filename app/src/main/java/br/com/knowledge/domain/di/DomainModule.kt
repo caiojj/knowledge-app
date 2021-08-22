@@ -1,7 +1,6 @@
 package br.com.knowledge.domain.di
 
-import br.com.knowledge.domain.CreateAccountUseCase
-import br.com.knowledge.domain.ResponseLoginUseCase
+import br.com.knowledge.domain.*
 import org.koin.core.context.loadKoinModules
 import org.koin.core.module.Module
 import org.koin.dsl.module
@@ -16,6 +15,9 @@ object DomainModule {
         return module {
             factory { ResponseLoginUseCase(get()) }
             factory { CreateAccountUseCase(get()) }
+            factory { GetActiveUserUseCase(get()) }
+            factory { SaveActiveUserUseCase(get()) }
+            factory { DeleteActiveUserUseCase(get()) }
         }
     }
 }

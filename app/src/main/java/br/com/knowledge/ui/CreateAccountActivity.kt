@@ -7,13 +7,13 @@ import br.com.knowledge.R
 import br.com.knowledge.core.extensions.createDialog
 import br.com.knowledge.core.extensions.createProgressDialog
 import br.com.knowledge.data.module.AccountData
-import br.com.knowledge.databinding.ActivityCreateAccounterBinding
+import br.com.knowledge.databinding.ActivityCreateAccountBinding
 import br.com.knowledge.presentation.CreateAccountViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CreateAccountActivity : AppCompatActivity() {
 
-    private val binding by lazy { ActivityCreateAccounterBinding.inflate(layoutInflater) }
+    private val binding by lazy { ActivityCreateAccountBinding.inflate(layoutInflater) }
     private val viewModel by viewModel<CreateAccountViewModel>()
     private val dialog by lazy { createProgressDialog() }
     override fun onCreate(savedInstanceState: Bundle?) {

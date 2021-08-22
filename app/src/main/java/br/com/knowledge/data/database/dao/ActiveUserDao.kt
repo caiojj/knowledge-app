@@ -1,0 +1,18 @@
+package br.com.knowledge.data.database.dao
+
+import androidx.room.*
+import br.com.knowledge.data.module.ActiveUser
+import kotlinx.coroutines.flow.Flow
+
+@Dao
+interface ActiveUserDao {
+
+    @Query("SELECT * FROM active_user")
+    fun findAll(): Flow<List<ActiveUser>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun save(activeUser: ActiveUser)
+
+    @Query("DELETE FROM active_user WHERE email = :email")
+    fun delete(email: String)
+}
