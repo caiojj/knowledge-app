@@ -13,12 +13,26 @@
 <td>
 
 
-![](interface/Screenshot_20210821_022242.png)
+![](interface/Screenshot_20210822_200224.png)
 </td>
 
 <td>
 
-![](interface/Screenshot_20210821_134315.png)
+![](interface/Screenshot_20210821_022242.png)
 </td>
 </tr>
+
+<td>
+
+
+![](interface/Screenshot_20210822_200707.png)
+</td>
+
+<td>
+
+![](interface/Screenshot_20210822_200105.png)
+</td>
+</tr>
+
+
 </table>
