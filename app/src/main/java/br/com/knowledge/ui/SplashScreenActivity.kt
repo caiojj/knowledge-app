@@ -5,9 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import br.com.knowledge.core.extensions.createDialog
-import br.com.knowledge.core.extensions.createProgressDialog
 import br.com.knowledge.databinding.ActivitySplashScreenBinding
 import br.com.knowledge.presentation.SplashScreenViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -27,11 +25,11 @@ class SplashScreenActivity : AppCompatActivity() {
 
     private fun openingProcessing(token: String?) {
         Handler(Looper.getMainLooper()).postDelayed({
-            loginOrMain(token)
+            loginOrArticles(token)
         }, 2000)
     }
 
-    private fun loginOrMain(token: String?) {
+    private fun loginOrArticles(token: String?) {
         if(token.isNullOrEmpty()) {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)

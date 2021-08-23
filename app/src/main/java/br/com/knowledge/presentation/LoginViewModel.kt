@@ -17,7 +17,7 @@ import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
-class MainViewModel(
+class LoginViewModel(
     private val saveActiveUserUseCase: SaveActiveUserUseCase,
     private val responseLoginUseCase: ResponseLoginUseCase
 ) : ViewModel() {

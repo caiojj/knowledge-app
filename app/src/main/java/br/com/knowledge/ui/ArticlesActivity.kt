@@ -21,7 +21,11 @@ class ArticlesActivity : AppCompatActivity() {
 
         binding.rvArticles.adapter = adapter
         bindingObserver()
-        viewModel.getArticles("bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTksIm5hbWUiOiJMdWNhcyBMZWFsIiwiZW1haWwiOiJsdWNhMUBnbWFpbC5jb20iLCJhZG1pbiI6ZmFsc2UsImlhdCI6MTYyOTU5NTczODg1NywiZXhwIjoxNjI5NTk4NDE3MjU3fQ.hq_sp82uapcwc-0PMNe7UdnX67FtyHQ0u6eV2SLSh0M")
+        authenticationRequest()
+    }
+
+    private fun authenticationRequest() {
+        viewModel.getToken()
     }
 
     private fun bindingObserver() {
@@ -31,15 +35,15 @@ class ArticlesActivity : AppCompatActivity() {
                 is State.Success -> {
                     dialog.dismiss()
                     adapter.submitList(it.articles.body()?.data)
-                    createDialog {
-                        setMessage("${it}")
-                    }
                 }
                 is State.Error -> {
                     dialog.dismiss()
                     createDialog {
                         setMessage("Errro ao tentar acessar o servidor ${it.error.message}")
                     }
+                }
+                is State.ObtainedToken -> {
+                    viewModel.getArticles(it.token)
                 }
             }
         }
