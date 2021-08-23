@@ -4,42 +4,36 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import br.com.knowledge.data.model.ResponseArticles
-import br.com.knowledge.domain.GetArticlesUseCase
+import br.com.knowledge.domain.GetTokenUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
-import retrofit2.Response
 
-class ArticlesViewModel(
-private val getArticlesUseCase: GetArticlesUseCase
+class SplashScreenViewModel(
+    private val getTokenUseCase: GetTokenUseCase
 ) : ViewModel() {
 
     private val _state = MutableLiveData<State>()
     val state: LiveData<State> = _state
 
-    fun getArticles(token: String) {
+    fun getToken() {
         viewModelScope.launch {
-            getArticlesUseCase(token)
-                .flowOn(Dispatchers.Main)
-                .onStart {
-                    _state.value = State.Loading
-                }
+            getTokenUseCase()
+                .flowOn(Dispatchers.Default)
                 .catch {
                     _state.value = State.Error(it)
                 }
                 .collect {
-                    _state.value = State.Success(it)
+                    _state.value = State.ObtainedToken(it)
                 }
         }
     }
-}
 
-sealed class State {
-    object Loading : State()
-    data class Success(val articles: Response<ResponseArticles>) : State()
-    data class Error(val error: Throwable) : State()
+    sealed class State {
+        data class ObtainedToken(val token: List<String>) : State()
+        data class Error(val error: Throwable) : State()
+    }
 }

@@ -7,6 +7,9 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface ActiveUserDao {
 
+    @Query("SELECT token FROM active_user" )
+    fun getToken() : Flow<List<String>>
+
     @Query("SELECT * FROM active_user")
     fun findAll(): Flow<List<ActiveUser>>
 

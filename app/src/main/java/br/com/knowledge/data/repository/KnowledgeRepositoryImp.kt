@@ -54,6 +54,10 @@ class KnowledgeRepositoryImp(
         }
     }
 
+    override suspend fun getToken(): Flow<List<String>> {
+        return dao.getToken()
+    }
+
     override suspend fun findAll(): Flow<List<ActiveUser>> {
         return dao.findAll()
     }

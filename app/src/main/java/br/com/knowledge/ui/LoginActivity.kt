@@ -11,7 +11,7 @@ import br.com.knowledge.databinding.ActivityMainBinding
 import br.com.knowledge.presentation.MainViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
 
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private val viewModel by viewModel<MainViewModel>()
@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.tvCreateAccounter.setOnClickListener {
-            val intent = Intent(this@MainActivity, CreateAccountActivity::class.java)
+            val intent = Intent(this@LoginActivity, CreateAccountActivity::class.java)
             startActivity(intent)
         }
     }

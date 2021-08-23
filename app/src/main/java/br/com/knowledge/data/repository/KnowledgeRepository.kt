@@ -14,6 +14,8 @@ interface KnowledgeRepository {
 
     suspend fun getArticles(token: String) : Flow<Response<ResponseArticles>>
 
+    suspend fun getToken() : Flow<List<String>>
+
     suspend fun findAll(): Flow<List<ActiveUser>>
 
     suspend fun save(activeUser: ActiveUser)
