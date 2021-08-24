@@ -8,14 +8,14 @@ import br.com.knowledge.core.extensions.createProgressDialog
 import br.com.knowledge.core.extensions.hideSoftKeyboard
 import br.com.knowledge.data.model.ActiveUser
 import br.com.knowledge.data.model.RequestLogin
-import br.com.knowledge.databinding.ActivityMainBinding
+import br.com.knowledge.databinding.ActivityLoginBinding
 import br.com.knowledge.presentation.LoginViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginActivity : AppCompatActivity() {
 
     private val BEARER = "bearer "
-    private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+    private val binding by lazy { ActivityLoginBinding.inflate(layoutInflater) }
     private val viewModel by viewModel<LoginViewModel>()
     private val dialog by lazy { createProgressDialog() }
 
@@ -55,7 +55,7 @@ class LoginActivity : AppCompatActivity() {
                 }
                 LoginViewModel.State.Saved -> {
                     dialog.dismiss()
-                    val intent = Intent(this, ArticlesActivity::class.java)
+                    val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                 }
             }

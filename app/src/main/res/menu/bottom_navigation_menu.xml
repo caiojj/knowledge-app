@@ -4,16 +4,17 @@
     <item
         android:id="@+id/view_articles"
         android:enabled="true"
+        android:checkable="true"
         android:icon="@drawable/ic_articles"
         android:title="Artigos"/>
     <item
-        android:id="@+id/edit_article"
-        android:enabled="true"
+        android:id="@+id/view_edit_article"
+        android:checked="true"
         android:icon="@drawable/ic_add_articles"
-        android:title="Escreveer" />
+        android:title="Escrever" />
     <item
-        android:id="@+id/profile"
-        android:enabled="true"
+        android:id="@+id/view_profile"
+        android:checked="true"
         android:icon="@drawable/ic_profile"
         android:title="Perfil"/>
 </menu>

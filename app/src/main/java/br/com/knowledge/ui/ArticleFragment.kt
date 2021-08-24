@@ -1,27 +1,30 @@
 package br.com.knowledge.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import br.com.knowledge.core.extensions.createDialog
-import br.com.knowledge.core.extensions.createProgressDialog
-import br.com.knowledge.databinding.ActivityArticlesBinding
-import br.com.knowledge.presentation.ArticlesViewModel
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import br.com.knowledge.databinding.FragmentArticleBinding
+import br.com.knowledge.presentation.MainViewModel
 import br.com.knowledge.presentation.State
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ArticlesActivity : AppCompatActivity() {
+class ArticleFragment : Fragment() {
 
-    private val binding by lazy { ActivityArticlesBinding.inflate(layoutInflater) }
+    private val binding by lazy { FragmentArticleBinding.inflate(layoutInflater) }
     private val adapter by lazy { ArticlesListAdapter() }
-    private val dialog by lazy { createProgressDialog() }
-    private val viewModel by viewModel<ArticlesViewModel>()
+    private val viewModel by viewModel<MainViewModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(binding.root)
-
         binding.rvArticles.adapter = adapter
         bindingObserver()
         authenticationRequest()
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
+        return binding.root
     }
 
     private fun authenticationRequest() {
@@ -31,16 +34,15 @@ class ArticlesActivity : AppCompatActivity() {
     private fun bindingObserver() {
         viewModel.state.observe(this) {
             when(it) {
-                State.Loading -> dialog.show()
+                State.Loading -> {
+                    binding.pbArticles.visibility = View.VISIBLE
+                }
                 is State.Success -> {
-                    dialog.dismiss()
+                    binding.pbArticles.visibility = View.GONE
                     adapter.submitList(it.articles.body()?.data)
                 }
                 is State.Error -> {
-                    dialog.dismiss()
-                    createDialog {
-                        setMessage("Errro ao tentar acessar o servidor ${it.error.message}")
-                    }
+                    // Trata erro
                 }
                 is State.ObtainedToken -> {
                     viewModel.getArticles(it.token)

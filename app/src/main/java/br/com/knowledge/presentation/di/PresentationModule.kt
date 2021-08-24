@@ -1,6 +1,6 @@
 package br.com.knowledge.presentation.di
 
-import br.com.knowledge.presentation.ArticlesViewModel
+import br.com.knowledge.presentation.MainViewModel
 import br.com.knowledge.presentation.LoginViewModel
 import br.com.knowledge.presentation.CreateAccountViewModel
 import br.com.knowledge.presentation.SplashScreenViewModel
@@ -19,7 +19,7 @@ object PresentationModule {
         return module {
             viewModel { LoginViewModel(get(), get()) }
             viewModel { CreateAccountViewModel(get()) }
-            viewModel { ArticlesViewModel(get(), get()) }
+            viewModel { MainViewModel(get(), get(), get()) }
             viewModel { SplashScreenViewModel(get()) }
         }
     }
