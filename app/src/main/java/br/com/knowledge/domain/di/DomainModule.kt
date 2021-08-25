@@ -20,6 +20,8 @@ object DomainModule {
             factory { DeleteActiveUserUseCase(get()) }
             factory { GetArticlesUseCase(get()) }
             factory { GetTokenUseCase(get()) }
+            factory { GetEmailUseCase(get()) }
+            factory { GetMyArticlesUseCase(get()) }
         }
     }
 }

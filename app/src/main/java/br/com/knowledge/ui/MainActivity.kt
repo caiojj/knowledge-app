@@ -1,15 +1,21 @@
 package br.com.knowledge.ui
 
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import br.com.knowledge.R
 import br.com.knowledge.databinding.ActivityMainBinding
+import br.com.knowledge.presentation.MainViewModel
+import br.com.knowledge.presentation.State
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+    private val viewModel by viewModel<MainViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -17,6 +23,7 @@ class MainActivity : AppCompatActivity() {
         setFragment(ArticleFragment())
         initBottomNavigation()
     }
+
 
     private fun initBottomNavigation() {
         binding.bottomNavigation.setOnItemSelectedListener {

@@ -33,12 +33,11 @@ class SplashScreenActivity : AppCompatActivity() {
         if(token.isNullOrEmpty()) {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
-            finish()
         } else {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
-            finish()
         }
+        finish()
     }
 
     private fun bindingObserver() {

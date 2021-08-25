@@ -57,6 +57,7 @@ class LoginActivity : AppCompatActivity() {
                     dialog.dismiss()
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
+                    finish()
                 }
             }
         }

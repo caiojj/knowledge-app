@@ -34,19 +34,21 @@ class ArticleFragment : Fragment() {
     private fun bindingObserver() {
         viewModel.state.observe(this) {
             when(it) {
-                State.Loading -> {
+                State.LoadingAllArticles -> {
                     binding.pbArticles.visibility = View.VISIBLE
                 }
-                is State.Success -> {
-                    binding.pbArticles.visibility = View.GONE
-                    adapter.submitList(it.articles.body()?.data)
-                }
-                is State.Error -> {
-                    // Trata erro
+                is State.ObtainedArticles -> {
+                    if(it.articles.isSuccessful) {
+                        binding.pbArticles.visibility = View.GONE
+                        adapter.submitList(it.articles.body()?.data)
+                    }
                 }
                 is State.ObtainedToken -> {
-                    viewModel.getArticles(it.token)
+                    it.token.let { token ->
+                        viewModel.getArticles(token!!)
+                    }
                 }
+                else -> {}
             }
         }
     }

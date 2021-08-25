@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import okhttp3.Authenticator
 import retrofit2.HttpException
+import retrofit2.Response
 
 class KnowledgeRepositoryImp(
     private val appDataBase: AppDataBase,
@@ -54,6 +55,17 @@ class KnowledgeRepositoryImp(
         }
     }
 
+    override suspend fun getMyArticles(token: String, id: Long) = flow {
+        try {
+            val myArticles = articles.getMyArticles(token, id)
+            emit(myArticles)
+        } catch (e: HttpException) {
+            val json = e.response()?.errorBody()?.toString()
+            val errorMyArticles = Gson().fromJson(json, ErrorResponse::class.java)
+            throw  RemoteException(errorMyArticles.message)
+        }
+    }
+
     override suspend fun getToken(): Flow<List<String>> {
         return dao.getToken()
     }
@@ -68,5 +80,9 @@ class KnowledgeRepositoryImp(
 
     override suspend fun delete(email: String) {
        dao.delete(email)
+    }
+
+    override suspend fun getEmail(): Flow<List<String>> {
+        return dao.getEmail()
     }
 }

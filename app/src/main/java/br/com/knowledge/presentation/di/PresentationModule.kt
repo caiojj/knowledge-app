@@ -19,7 +19,7 @@ object PresentationModule {
         return module {
             viewModel { LoginViewModel(get(), get()) }
             viewModel { CreateAccountViewModel(get()) }
-            viewModel { MainViewModel(get(), get(), get()) }
+            viewModel { MainViewModel(get(), get(), get(), get(), get(), get()) }
             viewModel { SplashScreenViewModel(get()) }
         }
     }
