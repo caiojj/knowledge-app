@@ -48,13 +48,14 @@ class ProfileFragment: Fragment() {
         val inflate = layoutInflater.inflate(R.layout.sheets_bottom_profile, null)
         dialog.setContentView(inflate)
 
-        val tvUploadImage = dialog.findViewById(R.id.tv_uploadImage) as TextView?
+        val tvEditProfile = dialog.findViewById(R.id.tv_edit_profile) as TextView?
 
         /**
         * Events
          * */
-        tvUploadImage?.setOnClickListener {
-        Toast.makeText(context, "Estou fufundo", Toast.LENGTH_SHORT).show()
+        tvEditProfile?.setOnClickListener {
+            val intent = Intent(context, EditProfileActivity::class.java)
+            startActivity(intent)
             dialog.dismiss()
         }
 

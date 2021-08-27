@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Knowleged">
         <activity
+            android:name=".ui.EditProfileActivity"
+            android:exported="true" />
+        <activity
             android:name=".ui.ProfileActivity"
             android:exported="true" />
         <activity
