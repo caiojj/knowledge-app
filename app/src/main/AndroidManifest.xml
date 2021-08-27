@@ -3,6 +3,7 @@
     package="br.com.knowledge">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:name=".App"
@@ -14,9 +15,6 @@
         android:theme="@style/Theme.Knowleged">
         <activity
             android:name=".ui.EditProfileActivity"
-            android:exported="true" />
-        <activity
-            android:name=".ui.ProfileActivity"
             android:exported="true" />
         <activity
             android:name=".ui.SplashScreenActivity"
