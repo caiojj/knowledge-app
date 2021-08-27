@@ -15,6 +15,9 @@
         <entry key="app/src/main/res/drawable/ic_learning_3.xml" value="0.19907407407407407" />
         <entry key="app/src/main/res/drawable/ic_user.xml" value="0.22708333333333333" />
         <entry key="app/src/main/res/drawable/password.xml" value="0.22708333333333333" />
+        <entry key="app/src/main/res/drawable/rounded_dialog.xml" value="0.2235897435897436" />
+        <entry key="app/src/main/res/drawable/sheets_bottom_rounded.xml" value="0.33" />
+        <entry key="app/src/main/res/drawable/sheets_botton_rounded_dialog.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_articles.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_create_account.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_create_accounter.xml" value="0.33" />
@@ -24,8 +27,9 @@
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_article.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.31419705197827774" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="1.0" />
         <entry key="app/src/main/res/layout/item_article.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/sheets_bottom_profile.xml" value="0.75" />
         <entry key="app/src/main/res/menu/bottom_navigation_menu.xml" value="0.22" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_background.xml" value="0.22708333333333333" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_banner.xml" value="0.11666666666666667" />

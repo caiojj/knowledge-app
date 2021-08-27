@@ -7,10 +7,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import android.widget.Toast
+import br.com.knowledge.R
 import br.com.knowledge.data.model.ActiveUser
 import br.com.knowledge.presentation.MainViewModel
 import br.com.knowledge.databinding.FragmentProfileBinding
 import br.com.knowledge.presentation.State
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ProfileFragment: Fragment() {
@@ -18,6 +22,7 @@ class ProfileFragment: Fragment() {
     private val binding by lazy { FragmentProfileBinding.inflate(layoutInflater) }
     private val viewModel by viewModel<MainViewModel>()
     private val adapter by lazy { ArticlesListAdapter() }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?{
         bindingObserver()
         viewModel.getActiveUser()
@@ -31,13 +36,35 @@ class ProfileFragment: Fragment() {
         binding.ivLogout.setOnClickListener {
             viewModel.getEmail()
         }
+
+        binding.ivProfile.setOnLongClickListener {
+            showSheetBottomDialog()
+            true
+        }
+    }
+
+    private fun showSheetBottomDialog() {
+        val dialog = BottomSheetDialog(this.requireContext(), R.style.AppBottomSheetDialogTheme)
+        val inflate = layoutInflater.inflate(R.layout.sheets_bottom_profile, null)
+        dialog.setContentView(inflate)
+
+        val tvUploadImage = dialog.findViewById(R.id.tv_uploadImage) as TextView?
+
+        /**
+        * Events
+         * */
+        tvUploadImage?.setOnClickListener {
+        Toast.makeText(context, "Estou fufundo", Toast.LENGTH_SHORT).show()
+            dialog.dismiss()
+        }
+
+        dialog.show()
     }
 
     private fun initComponents(activeUser: ActiveUser) {
         binding.tvName.text = activeUser.name
         binding.tvUserName.text = "@caiojj"
     }
-
     private fun bindingObserver() {
         viewModel.state.observe(viewLifecycleOwner) {
             when(it) {

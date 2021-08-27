@@ -1,5 +1,6 @@
 package br.com.knowledge.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment
 import br.com.knowledge.databinding.FragmentArticleBinding
 import br.com.knowledge.presentation.MainViewModel
 import br.com.knowledge.presentation.State
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ArticleFragment : Fragment() {
@@ -16,14 +18,10 @@ class ArticleFragment : Fragment() {
     private val adapter by lazy { ArticlesListAdapter() }
     private val viewModel by viewModel<MainViewModel>()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
         binding.rvArticles.adapter = adapter
         bindingObserver()
         authenticationRequest()
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
         return binding.root
     }
 
@@ -32,7 +30,7 @@ class ArticleFragment : Fragment() {
     }
 
     private fun bindingObserver() {
-        viewModel.state.observe(this) {
+        viewModel.state.observe(viewLifecycleOwner) {
             when(it) {
                 State.LoadingAllArticles -> {
                     binding.pbArticles.visibility = View.VISIBLE
@@ -42,6 +40,9 @@ class ArticleFragment : Fragment() {
                         binding.pbArticles.visibility = View.GONE
                         adapter.submitList(it.articles.body()?.data)
                     }
+                }
+                is State.Error -> {
+                    // Tratar erros
                 }
                 is State.ObtainedToken -> {
                     it.token.let { token ->
