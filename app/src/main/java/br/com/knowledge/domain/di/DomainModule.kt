@@ -22,6 +22,7 @@ object DomainModule {
             factory { GetTokenUseCase(get()) }
             factory { GetEmailUseCase(get()) }
             factory { GetMyArticlesUseCase(get()) }
+            factory { UploadImageUseCase(get()) }
         }
     }
 }

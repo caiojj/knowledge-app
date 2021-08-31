@@ -1,9 +1,6 @@
 package br.com.knowledge.presentation.di
 
-import br.com.knowledge.presentation.MainViewModel
-import br.com.knowledge.presentation.LoginViewModel
-import br.com.knowledge.presentation.CreateAccountViewModel
-import br.com.knowledge.presentation.SplashScreenViewModel
+import br.com.knowledge.presentation.*
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.core.module.Module
@@ -21,6 +18,7 @@ object PresentationModule {
             viewModel { CreateAccountViewModel(get()) }
             viewModel { MainViewModel(get(), get(), get(), get(), get(), get()) }
             viewModel { SplashScreenViewModel(get()) }
+            viewModel { EditProfileViewModel(get(), get()) }
         }
     }
 }

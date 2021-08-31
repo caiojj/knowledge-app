@@ -5,24 +5,74 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import br.com.knowledge.R
+import br.com.knowledge.core.extensions.createDialog
+import br.com.knowledge.core.extensions.createProgressDialog
+import br.com.knowledge.core.extensions.loadingImage
+import br.com.knowledge.data.model.ActiveUser
 import br.com.knowledge.databinding.ActivityEditProfileBinding
+import br.com.knowledge.presentation.EditProfileViewModel
+import com.bumptech.glide.Glide
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class EditProfileActivity : AppCompatActivity() {
+
+    private val binding by lazy { ActivityEditProfileBinding.inflate(layoutInflater) }
+    private val viewModel by viewModel<EditProfileViewModel>()
+    private val dialog by lazy {  createProgressDialog() }
+    private val activeUser: ActiveUser by lazy { initUser() }
+    private lateinit var image: Uri
 
     companion object {
         private val PERMISSION_CODE_IMAGE_PICK = 100
         private val IMAGE_PICK_CODE = 101
     }
 
-    private val binding by lazy { ActivityEditProfileBinding.inflate(layoutInflater) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         bindingListeners()
+        bindingObserver()
+        initComponent()
+    }
+
+    private fun initUser() : ActiveUser {
+        return intent.getSerializableExtra("activeUser") as ActiveUser
+    }
+
+    private fun initComponent() {
+        binding.tieName.setText(activeUser.name)
+
+        loadingImage(binding.root.context, activeUser.imageUrl, binding.ivProfile)
+    }
+
+    private fun bindingObserver() {
+        viewModel.state.observe(this) {
+            when(it) {
+                EditProfileViewModel.State.Loading -> {
+                    dialog.show()
+                }
+                is EditProfileViewModel.State.Uploaded -> {
+                    dialog.dismiss()
+                    if(it.res.isSuccessful)  {
+                        binding.ivProfile.setImageURI(image)
+                    } else {
+                        createDialog {
+                            setMessage("${it.res.message()}")
+                        }
+                    }
+                }
+                is EditProfileViewModel.State.Error -> {
+                    dialog.dismiss()
+                    Log.e("Uploaded Error", "${it.error}")
+                }
+            }
+        }
     }
 
     private fun bindingListeners() {
@@ -63,8 +113,8 @@ class EditProfileActivity : AppCompatActivity() {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     pickImageFromGallery()
                 } else {
-                    // Abri uma activity que esclarece por que esta
-                    // permissão e necessario para o funcionamento do app
+                // Implementação de uma activity que da mais
+                // detahes para o usuário do porque a permissão e necessária
                 }
             }
         }
@@ -72,11 +122,13 @@ class EditProfileActivity : AppCompatActivity() {
 
     @SuppressLint("MissingSuperCall")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        Log.e("PICK", "PEGAR MENSAGEM")
-        Log.e("Result", "${resultCode == Activity.RESULT_OK}-${requestCode == IMAGE_PICK_CODE}")
-
         if(resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE) {
-            binding.ivProfile.setImageURI(data?.data)
+            data?.let {
+                viewModel.uploadImage(activeUser.token, activeUser.id, it)
+            }
+            data?.data?.let {
+                image = it
+            }
         }
     }
 }

@@ -33,13 +33,16 @@ class LoginActivity : AppCompatActivity() {
                 LoginViewModel.State.Loading -> dialog.show()
                 is LoginViewModel.State.Logged -> {
                     if(it.body.isSuccessful) {
-                        viewModel.insert(ActiveUser(
-                            it.body.body()!!.id,
-                            it.body.body()!!.name,
-                            it.body.body()!!.email,
-                            it.body.body()!!.admin,
-                            BEARER + it.body.body()!!.token
-                        ))
+                        it.body.body()?.let { res ->
+                            viewModel.insert(ActiveUser(
+                                res.id,
+                                res.name,
+                                res.email,
+                                res.imageUrl,
+                                res.admin,
+                                BEARER + res.token
+                            ))
+                        }
                     } else {
                         dialog.dismiss()
                         createDialog {

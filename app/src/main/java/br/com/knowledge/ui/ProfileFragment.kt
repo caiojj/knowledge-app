@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import br.com.knowledge.R
+import br.com.knowledge.core.extensions.loadingImage
 import br.com.knowledge.data.model.ActiveUser
 import br.com.knowledge.presentation.MainViewModel
 import br.com.knowledge.databinding.FragmentProfileBinding
@@ -19,9 +20,10 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ProfileFragment: Fragment() {
 
-    private val binding by lazy { FragmentProfileBinding.inflate(layoutInflater) }
+    private lateinit var activeUser: ActiveUser
     private val viewModel by viewModel<MainViewModel>()
     private val adapter by lazy { ArticlesListAdapter() }
+    private val binding by lazy { FragmentProfileBinding.inflate(layoutInflater) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?{
         bindingObserver()
@@ -55,6 +57,7 @@ class ProfileFragment: Fragment() {
          * */
         tvEditProfile?.setOnClickListener {
             val intent = Intent(context, EditProfileActivity::class.java)
+            intent.putExtra("activeUser", activeUser)
             startActivity(intent)
             dialog.dismiss()
         }
@@ -65,7 +68,9 @@ class ProfileFragment: Fragment() {
     private fun initComponents(activeUser: ActiveUser) {
         binding.tvName.text = activeUser.name
         binding.tvUserName.text = "@caiojj"
+        loadingImage(binding.root.context, activeUser.imageUrl, binding.ivProfile)
     }
+
     private fun bindingObserver() {
         viewModel.state.observe(viewLifecycleOwner) {
             when(it) {
@@ -97,8 +102,9 @@ class ProfileFragment: Fragment() {
                 is State.ObtainedUser -> {
                     if (it.activeUser.firstOrNull() != null) {
                         val user = it.activeUser.first()
-                        initComponents(user)
-                        viewModel.getMyArticles(user.token, user.id)
+                        this.activeUser = user
+                        initComponents(activeUser)
+                        viewModel.getMyArticles(activeUser.token, activeUser.id)
                     }
                 }
             }

@@ -13,6 +13,12 @@ abstract class UseCase<Param, Source> {
         open suspend operator fun invoke(param1: Param1, param2: Param2) = execute(param1, param2)
     }
 
+    abstract class FourParams<Param1, Param2, Param3,Source> {
+        abstract suspend fun execute(param1: Param1, param2: Param2, param3: Param3): Flow<Source>
+
+        open suspend operator fun invoke(param1: Param1, param2: Param2, param3: Param3) = execute(param1, param2, param3)
+    }
+
     abstract class NoParam<Source> : UseCase<None, Flow<Source>>() {
         abstract suspend fun execute(): Flow<Source>
 
