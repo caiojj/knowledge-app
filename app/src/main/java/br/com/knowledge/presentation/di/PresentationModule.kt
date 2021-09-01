@@ -18,7 +18,7 @@ object PresentationModule {
             viewModel { CreateAccountViewModel(get()) }
             viewModel { MainViewModel(get(), get(), get(), get(), get(), get()) }
             viewModel { SplashScreenViewModel(get()) }
-            viewModel { EditProfileViewModel(get(), get()) }
+            viewModel { EditProfileViewModel(get(), get(), get()) }
         }
     }
 }

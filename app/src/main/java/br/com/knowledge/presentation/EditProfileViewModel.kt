@@ -7,6 +7,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import br.com.knowledge.data.model.ResponseUploadImage
+import br.com.knowledge.domain.UpdateImageUseCase
 import br.com.knowledge.domain.UploadImageUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
@@ -22,12 +24,29 @@ import java.io.File
 
 class EditProfileViewModel(
     private val uploadImageUseCase: UploadImageUseCase,
+    private val updateImageUseCase: UpdateImageUseCase,
     private val context: Context
 ) : ViewModel() {
 
     private val _state = MutableLiveData<State>()
     val state: LiveData<State>
     get() = _state
+
+    fun updateImage(url: String, id: Long) {
+        viewModelScope.launch {
+            updateImageUseCase(url, id)
+                .flowOn(Dispatchers.Default)
+                .onStart {
+                    _state.value = State.Loading
+                }
+                .catch {
+                    _state.value = State.Error(it)
+                }
+                .collect {
+                    _state.value = State.SavedUrl
+                }
+        }
+    }
 
     fun uploadImage(token: String, id: Long, file: Intent) {
         val requestBody = convertFromMultipartBody(file)
@@ -65,7 +84,8 @@ class EditProfileViewModel(
 
     sealed class State {
         object Loading: State()
-        data class Uploaded(val res: Response<Void>): State()
+        object SavedUrl: State()
+        data class Uploaded(val res: Response<ResponseUploadImage>): State()
         data class Error(val error: Throwable) : State()
     }
 }

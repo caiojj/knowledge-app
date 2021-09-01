@@ -54,14 +54,19 @@ class EditProfileActivity : AppCompatActivity() {
     private fun bindingObserver() {
         viewModel.state.observe(this) {
             when(it) {
+
+                EditProfileViewModel.State.SavedUrl -> dialog.dismiss()
                 EditProfileViewModel.State.Loading -> {
                     dialog.show()
                 }
                 is EditProfileViewModel.State.Uploaded -> {
-                    dialog.dismiss()
                     if(it.res.isSuccessful)  {
                         binding.ivProfile.setImageURI(image)
+                        it.res.body()?.let { res ->
+                            viewModel.updateImage(res.imageUrl, activeUser.id)
+                        }
                     } else {
+                        dialog.dismiss()
                         createDialog {
                             setMessage("${it.res.message()}")
                         }

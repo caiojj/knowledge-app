@@ -29,5 +29,7 @@ interface KnowledgeRepository {
 
     suspend fun getEmail() : Flow<List<String>>
 
-    suspend fun updateImageProfile(token: String, id: Long, image: MultipartBody.Part) : Flow<Response<Void>>
+    suspend fun updateImageProfile(token: String, id: Long, image: MultipartBody.Part) : Flow<Response<ResponseUploadImage>>
+
+    fun updateUrl(url: String, id: Long)
 }

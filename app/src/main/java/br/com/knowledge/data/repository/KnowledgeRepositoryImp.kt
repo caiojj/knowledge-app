@@ -104,4 +104,8 @@ class KnowledgeRepositoryImp(
             throw  RemoteException(uploadError.message)
         }
     }
+
+    override fun updateUrl(url: String, id: Long) {
+        return dao.updateUrl(url, id)
+    }
 }

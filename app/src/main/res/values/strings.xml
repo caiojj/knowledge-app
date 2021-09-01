@@ -22,4 +22,5 @@
     <string name="edi_profile_usuario">Usuario</string>
     <string name="edit_profile_nome">Nome</string>
     <string name="edit_profile_salvar">Salvar</string>
+    <string name="logout">Sair</string>
 </resources>

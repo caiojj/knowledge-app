@@ -21,7 +21,6 @@ fun loadingImage(context: Context, url: String?, imageView: ImageView) {
     Glide
         .with(context)
         .load(url)
-        .placeholder(R.drawable.ic_profile_avatar)
         .into(imageView)
 }
 

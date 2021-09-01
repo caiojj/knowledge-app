@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import br.com.knowledge.R
 import br.com.knowledge.core.extensions.loadingImage
 import br.com.knowledge.data.model.ActiveUser
@@ -35,9 +34,6 @@ class ProfileFragment: Fragment() {
     }
 
     private fun bindingListeners() {
-        binding.ivLogout.setOnClickListener {
-            viewModel.getEmail()
-        }
 
         binding.ivProfile.setOnLongClickListener {
             showSheetBottomDialog()
@@ -51,7 +47,7 @@ class ProfileFragment: Fragment() {
         dialog.setContentView(inflate)
 
         val tvEditProfile = dialog.findViewById(R.id.tv_edit_profile) as TextView?
-
+        val tvLogout = dialog.findViewById(R.id.tv_logout) as TextView?
         /**
         * Events
          * */
@@ -60,6 +56,10 @@ class ProfileFragment: Fragment() {
             intent.putExtra("activeUser", activeUser)
             startActivity(intent)
             dialog.dismiss()
+        }
+
+        tvLogout?.setOnClickListener {
+            viewModel.getEmail()
         }
 
         dialog.show()
