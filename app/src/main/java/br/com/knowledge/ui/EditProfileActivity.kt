@@ -17,7 +17,6 @@ import br.com.knowledge.core.extensions.loadingImage
 import br.com.knowledge.data.model.ActiveUser
 import br.com.knowledge.databinding.ActivityEditProfileBinding
 import br.com.knowledge.presentation.EditProfileViewModel
-import com.bumptech.glide.Glide
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class EditProfileActivity : AppCompatActivity() {
@@ -47,7 +46,7 @@ class EditProfileActivity : AppCompatActivity() {
 
     private fun initComponent() {
         binding.tieName.setText(activeUser.name)
-
+        binding.tieUser.setText(activeUser.nameUser)
         loadingImage(binding.root.context, activeUser.imageUrl, binding.ivProfile)
     }
 
