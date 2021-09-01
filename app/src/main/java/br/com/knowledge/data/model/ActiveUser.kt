@@ -9,6 +9,9 @@ data class ActiveUser(
     @PrimaryKey(autoGenerate = true)
     val id: Long,
     val name: String,
+    val nameUser: String,
+    val followers: Long,
+    val following: Long,
     val email: String,
     val imageUrl: String?,
     val admin: Boolean,

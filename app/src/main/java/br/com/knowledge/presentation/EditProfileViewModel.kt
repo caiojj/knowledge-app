@@ -18,7 +18,7 @@ import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import retrofit2.Response
 import java.io.File
 
@@ -70,16 +70,16 @@ class EditProfileViewModel(
         var field: Array<String>? = null
         val cursor = context.contentResolver.query(file.data!!, field, null, null, null, null)
         cursor?.moveToFirst()
-        val path = cursor?.getString(cursor?.getColumnIndexOrThrow(MediaStore.Images.Media.DATA))
+        val path = cursor?.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA))
         cursor?.close()
         return path
     }
 
     private fun convertFromMultipartBody(file: Intent): MultipartBody.Part {
         val imageFile = File(getPathImage(file))
-        val create = RequestBody.create(file.type?.toMediaTypeOrNull(), imageFile)
+        val create = imageFile.asRequestBody(file.type?.toMediaTypeOrNull())
 
-        return MultipartBody.Part.createFormData("file", "${imageFile.name}", create)
+        return MultipartBody.Part.createFormData("file", imageFile.name, create)
     }
 
     sealed class State {

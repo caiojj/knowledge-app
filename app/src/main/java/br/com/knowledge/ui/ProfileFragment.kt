@@ -48,6 +48,7 @@ class ProfileFragment: Fragment() {
 
         val tvEditProfile = dialog.findViewById(R.id.tv_edit_profile) as TextView?
         val tvLogout = dialog.findViewById(R.id.tv_logout) as TextView?
+
         /**
         * Events
          * */
