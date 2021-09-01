@@ -55,12 +55,14 @@ class CreateAccountActivity : AppCompatActivity() {
     private fun bindingListeners() {
         binding.btnCreateAccounter.setOnClickListener {
             val name = binding.tieName.text.toString()
+            val nameUser = binding.tieNameUser.text.toString()
             val email = binding.tieEmail.text.toString()
             val password = binding.tiePassword.text.toString()
             val confirmPassword = binding.tieConfirmPassword.text.toString()
 
             val newAccount = AccountData(
                 name = name,
+                nameUser = nameUser,
                 email = email,
                 password = password,
                 confirmPassword = confirmPassword

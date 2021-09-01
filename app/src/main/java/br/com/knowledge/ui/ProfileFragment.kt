@@ -68,7 +68,9 @@ class ProfileFragment: Fragment() {
 
     private fun initComponents(activeUser: ActiveUser) {
         binding.tvName.text = activeUser.name
-        binding.tvUserName.text = "@caiojj"
+        binding.tvUserName.text = activeUser.nameUser
+        binding.tvCountFollowers.text = activeUser.followers.toString()
+        binding.tvCountFollowing.text = activeUser.following.toString()
         loadingImage(binding.root.context, activeUser.imageUrl, binding.ivProfile)
     }
 

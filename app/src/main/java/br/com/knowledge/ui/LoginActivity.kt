@@ -37,6 +37,9 @@ class LoginActivity : AppCompatActivity() {
                             viewModel.insert(ActiveUser(
                                 res.id,
                                 res.name,
+                                res.nameUser,
+                                res.followers,
+                                res.following,
                                 res.email,
                                 res.imageUrl,
                                 res.admin,
