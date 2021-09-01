@@ -20,6 +20,11 @@
 
 ![](interface/Screenshot_20210821_022242.png)
 </td>
+
+<td>
+
+![](interface/Screenshot_20210901_160616.png)
+</td>
 </tr>
 
 <td>
@@ -31,6 +36,11 @@
 <td>
 
 ![](interface/Screenshot_20210822_200105.png)
+</td>
+
+<td>
+
+![](interface/Screenshot_20210901_160652.png)
 </td>
 </tr>
 

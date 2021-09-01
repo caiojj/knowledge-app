@@ -68,6 +68,7 @@ class ProfileFragment: Fragment() {
 
     private fun initComponents(activeUser: ActiveUser) {
         binding.tvName.text = activeUser.name
+        binding.toolbarProfile.title = activeUser.nameUser
         binding.tvUserName.text = activeUser.nameUser
         binding.tvCountFollowers.text = activeUser.followers.toString()
         binding.tvCountFollowing.text = activeUser.following.toString()

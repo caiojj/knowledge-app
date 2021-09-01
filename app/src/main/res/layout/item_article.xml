@@ -30,7 +30,7 @@
                 android:id="@+id/iv_banner"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:src="@mipmap/ic_banner" />
+                android:src="@mipmap/ic_android_10_foreground" />
 
             <TextView
                 android:id="@+id/title_article"
