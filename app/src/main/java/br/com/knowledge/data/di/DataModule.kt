@@ -7,6 +7,7 @@ import br.com.knowledge.data.repository.KnowledgeRepositoryImp
 import br.com.knowledge.data.services.ArticlesServices
 import br.com.knowledge.data.services.CreateAccountServices
 import br.com.knowledge.data.services.LoginServices
+import br.com.knowledge.data.services.UploadImageService
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -37,7 +38,7 @@ object DataModule {
     private fun repositoryModule(): Module {
         return module {
             single<KnowledgeRepository> {
-                KnowledgeRepositoryImp(get(), get(), get(), get())
+                KnowledgeRepositoryImp(get(), get(), get(), get(), get())
             }
         }
     }
@@ -69,6 +70,9 @@ object DataModule {
 
             single {
                 createService<ArticlesServices>(get(), get())
+            }
+            single {
+                createService<UploadImageService>(get(), get())
             }
         }
     }

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style
+        name="BottomSheetStyle"
+        parent="Widget.Design.BottomSheet.Modal">
+        <item
+            name="android:background">
+            @drawable/sheets_bottom_rounded
+        </item>
+    </style>
+
+    <style
+        name="AppBottomSheetDialogTheme"
+        parent="Theme.Design.Light.BottomSheetDialog">
+        <item
+            name="bottomSheetStyle">
+            @style/BottomSheetStyle
+        </item>
+    </style>
+</resources>

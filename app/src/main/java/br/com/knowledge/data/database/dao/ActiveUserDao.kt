@@ -22,4 +22,7 @@ interface ActiveUserDao {
 
     @Query("SELECT email FROM active_user")
     fun getEmail() : Flow<List<String>>
+
+    @Query("UPDATE active_user set imageUrl = :url WHERE id = :id")
+    fun updateUrl(url: String, id: Long)
 }

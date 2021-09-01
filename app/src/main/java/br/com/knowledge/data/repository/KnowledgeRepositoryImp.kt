@@ -6,10 +6,13 @@ import br.com.knowledge.data.model.*
 import br.com.knowledge.data.services.ArticlesServices
 import br.com.knowledge.data.services.CreateAccountServices
 import br.com.knowledge.data.services.LoginServices
+import br.com.knowledge.data.services.UploadImageService
 import com.google.gson.Gson
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import okhttp3.Authenticator
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.HttpException
 import retrofit2.Response
 
@@ -17,7 +20,8 @@ class KnowledgeRepositoryImp(
     private val appDataBase: AppDataBase,
     private val loginServices: LoginServices,
     private val createAccountService: CreateAccountServices,
-    private val articles: ArticlesServices
+    private val articles: ArticlesServices,
+    private val uploadImage: UploadImageService
 ) : KnowledgeRepository {
 
     private val dao = appDataBase.activeUserDao()
@@ -84,5 +88,24 @@ class KnowledgeRepositoryImp(
 
     override suspend fun getEmail(): Flow<List<String>> {
         return dao.getEmail()
+    }
+
+    override suspend fun updateImageProfile(
+        token: String,
+        id: Long,
+        file: MultipartBody.Part
+    ) = flow {
+        try {
+            val upload = uploadImage.uploadImageProfile(token, id, file)
+            emit(upload)
+        } catch(e: HttpException) {
+            val json = e.response()?.errorBody()?.toString()
+            val uploadError = Gson().fromJson(json, ErrorResponse::class.java)
+            throw  RemoteException(uploadError.message)
+        }
+    }
+
+    override fun updateUrl(url: String, id: Long) {
+        return dao.updateUrl(url, id)
     }
 }

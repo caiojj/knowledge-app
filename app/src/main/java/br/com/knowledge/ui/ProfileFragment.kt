@@ -7,17 +7,23 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import br.com.knowledge.R
+import br.com.knowledge.core.extensions.loadingImage
 import br.com.knowledge.data.model.ActiveUser
 import br.com.knowledge.presentation.MainViewModel
 import br.com.knowledge.databinding.FragmentProfileBinding
 import br.com.knowledge.presentation.State
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ProfileFragment: Fragment() {
 
-    private val binding by lazy { FragmentProfileBinding.inflate(layoutInflater) }
+    private lateinit var activeUser: ActiveUser
     private val viewModel by viewModel<MainViewModel>()
     private val adapter by lazy { ArticlesListAdapter() }
+    private val binding by lazy { FragmentProfileBinding.inflate(layoutInflater) }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?{
         bindingObserver()
         viewModel.getActiveUser()
@@ -28,14 +34,41 @@ class ProfileFragment: Fragment() {
     }
 
     private fun bindingListeners() {
-        binding.ivLogout.setOnClickListener {
+
+        binding.ivProfile.setOnLongClickListener {
+            showSheetBottomDialog()
+            true
+        }
+    }
+
+    private fun showSheetBottomDialog() {
+        val dialog = BottomSheetDialog(this.requireContext(), R.style.AppBottomSheetDialogTheme)
+        val inflate = layoutInflater.inflate(R.layout.sheets_bottom_profile, null)
+        dialog.setContentView(inflate)
+
+        val tvEditProfile = dialog.findViewById(R.id.tv_edit_profile) as TextView?
+        val tvLogout = dialog.findViewById(R.id.tv_logout) as TextView?
+        /**
+        * Events
+         * */
+        tvEditProfile?.setOnClickListener {
+            val intent = Intent(context, EditProfileActivity::class.java)
+            intent.putExtra("activeUser", activeUser)
+            startActivity(intent)
+            dialog.dismiss()
+        }
+
+        tvLogout?.setOnClickListener {
             viewModel.getEmail()
         }
+
+        dialog.show()
     }
 
     private fun initComponents(activeUser: ActiveUser) {
         binding.tvName.text = activeUser.name
         binding.tvUserName.text = "@caiojj"
+        loadingImage(binding.root.context, activeUser.imageUrl, binding.ivProfile)
     }
 
     private fun bindingObserver() {
@@ -69,8 +102,9 @@ class ProfileFragment: Fragment() {
                 is State.ObtainedUser -> {
                     if (it.activeUser.firstOrNull() != null) {
                         val user = it.activeUser.first()
-                        initComponents(user)
-                        viewModel.getMyArticles(user.token, user.id)
+                        this.activeUser = user
+                        initComponents(activeUser)
+                        viewModel.getMyArticles(activeUser.token, activeUser.id)
                     }
                 }
             }
