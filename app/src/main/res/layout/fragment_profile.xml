@@ -8,7 +8,7 @@
     tools:context=".ui.ProfileFragment">
 
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:id="@+id/sv_profile"
         android:layout_width="match_parent"
         android:overScrollMode="never"
@@ -144,13 +144,12 @@
                 android:id="@+id/rv_my_articles"
                 android:overScrollMode="never"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:clipToPadding="false"
-                android:orientation="horizontal"
                 android:padding="4dp"
                 app:layoutManager="LinearLayoutManager"
                 tools:itemCount="8"
                 tools:listitem="@layout/item_article" />
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
