@@ -105,7 +105,21 @@ class KnowledgeRepositoryImp(
         }
     }
 
-    override fun updateUrl(url: String, id: Long) {
+    override suspend fun updateUrl(url: String, id: Long) {
         return dao.updateUrl(url, id)
+    }
+
+    override suspend fun getContentArticle(
+        token: String,
+        id: Long
+    ): Flow<Response<ContentArticle>> = flow {
+        try {
+            val content = articles.getContentArticle(token, id)
+            emit(content)
+        } catch (e: HttpException) {
+            val json = e.response()?.errorBody()?.toString()
+            val contentError = Gson().fromJson(json, ErrorResponse::class.java)
+            throw  RemoteException(contentError.message)
+        }
     }
 }

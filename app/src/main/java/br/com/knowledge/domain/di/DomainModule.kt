@@ -24,6 +24,7 @@ object DomainModule {
             factory { GetMyArticlesUseCase(get()) }
             factory { UploadImageUseCase(get()) }
             factory { UpdateImageUseCase(get()) }
+            factory { GetContentArticleUseCase(get()) }
         }
     }
 }

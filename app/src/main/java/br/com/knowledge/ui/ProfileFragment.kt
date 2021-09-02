@@ -34,10 +34,17 @@ class ProfileFragment: Fragment() {
     }
 
     private fun bindingListeners() {
-
         binding.ivProfile.setOnLongClickListener {
             showSheetBottomDialog()
             true
+        }
+
+        adapter.readArticleListener = {
+            val intent = Intent(context, ReadArticleActivity::class.java)
+            intent.putExtra("id", it.id)
+            intent.putExtra("title", it.name)
+            intent.putExtra("token", activeUser.token)
+            startActivity(intent)
         }
     }
 
@@ -69,7 +76,6 @@ class ProfileFragment: Fragment() {
     private fun initComponents(activeUser: ActiveUser) {
         binding.tvName.text = activeUser.name
         binding.toolbarProfile.title = activeUser.nameUser
-        binding.tvUserName.text = activeUser.nameUser
         binding.tvCountFollowers.text = activeUser.followers.toString()
         binding.tvCountFollowing.text = activeUser.following.toString()
         loadingImage(binding.root.context, activeUser.imageUrl, binding.ivProfile)
@@ -91,7 +97,6 @@ class ProfileFragment: Fragment() {
                     activity?.finish()
                 }
                 is State.ObtainedEmail -> {
-                    Log.e("ObtainedEmail", "$it")
                     if (it.email != null)
                         viewModel.deleteActivityUser(it.email)
                 }

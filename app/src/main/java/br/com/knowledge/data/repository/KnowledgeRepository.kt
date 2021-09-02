@@ -31,5 +31,7 @@ interface KnowledgeRepository {
 
     suspend fun updateImageProfile(token: String, id: Long, image: MultipartBody.Part) : Flow<Response<ResponseUploadImage>>
 
-    fun updateUrl(url: String, id: Long)
+    suspend fun updateUrl(url: String, id: Long)
+
+    suspend fun getContentArticle(token: String, id: Long) : Flow<Response<ContentArticle>>
 }

@@ -19,6 +19,7 @@ object PresentationModule {
             viewModel { MainViewModel(get(), get(), get(), get(), get(), get()) }
             viewModel { SplashScreenViewModel(get()) }
             viewModel { EditProfileViewModel(get(), get(), get()) }
+            viewModel { ReadArticleViewModel(get()) }
         }
     }
 }

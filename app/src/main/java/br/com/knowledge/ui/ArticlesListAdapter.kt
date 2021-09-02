@@ -5,10 +5,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import br.com.knowledge.R
 import br.com.knowledge.data.model.Article
 import br.com.knowledge.databinding.ItemArticleBinding
 
 class ArticlesListAdapter : ListAdapter<Article, ArticlesListAdapter.ViewHolder>(DiffCallback()) {
+
+    var readArticleListener: (Article) -> Unit = {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -26,6 +29,10 @@ class ArticlesListAdapter : ListAdapter<Article, ArticlesListAdapter.ViewHolder>
         fun bind(item: Article) {
             binding.titleArticle.text = item.name
             binding.descriptionArticle.text = item.description
+
+            binding.root.setOnClickListener {
+                readArticleListener(item)
+            }
         }
     }
 }
