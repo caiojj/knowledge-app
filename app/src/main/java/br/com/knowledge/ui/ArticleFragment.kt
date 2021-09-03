@@ -1,6 +1,5 @@
 package br.com.knowledge.ui
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +8,6 @@ import androidx.fragment.app.Fragment
 import br.com.knowledge.databinding.FragmentArticleBinding
 import br.com.knowledge.presentation.MainViewModel
 import br.com.knowledge.presentation.State
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ArticleFragment : Fragment() {

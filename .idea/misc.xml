@@ -19,6 +19,7 @@
         <entry key="app/src/main/res/drawable/rounded_dialog.xml" value="0.2235897435897436" />
         <entry key="app/src/main/res/drawable/sheets_bottom_rounded.xml" value="0.75" />
         <entry key="app/src/main/res/drawable/sheets_botton_rounded_dialog.xml" value="0.25" />
+        <entry key="app/src/main/res/layout-v26/fragment_article.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_articles.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_create_account.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_create_accounter.xml" value="0.33" />
@@ -29,7 +30,7 @@
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_read_article.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.5" />
-        <entry key="app/src/main/res/layout/fragment_article.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_article.xml" value="0.35837245696400627" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.22388059701492538" />
         <entry key="app/src/main/res/layout/item_article.xml" value="0.47378640776699027" />
         <entry key="app/src/main/res/layout/sheets_bottom_profile.xml" value="0.38936959208899874" />
