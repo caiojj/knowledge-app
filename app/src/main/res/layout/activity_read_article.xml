@@ -33,13 +33,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
-            <com.google.android.material.textview.MaterialTextView
+            <WebView
                 android:id="@+id/tv_content_article"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="5dp"
                 android:layout_marginTop="8dp"
-                android:justificationMode="inter_word"
                 tools:text="@string/lorem_Ipsum" />
         </LinearLayout>
     </ScrollView>
