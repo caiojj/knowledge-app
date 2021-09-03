@@ -1,5 +1,6 @@
 package br.com.knowledge.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,12 +16,23 @@ class ArticleFragment : Fragment() {
     private val binding by lazy { FragmentArticleBinding.inflate(layoutInflater) }
     private val adapter by lazy { ArticlesListAdapter() }
     private val viewModel by viewModel<MainViewModel>()
-
+    private var token: String? = null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
         binding.rvArticles.adapter = adapter
         bindingObserver()
         authenticationRequest()
+        bindingListeners()
         return binding.root
+    }
+
+    private fun bindingListeners() {
+        adapter.readArticleListener = {
+            val intent = Intent(context, ReadArticleActivity::class.java)
+            intent.putExtra("id", it.id)
+            intent.putExtra("title", it.name)
+            intent.putExtra("token", token)
+            startActivity(intent)
+        }
     }
 
     private fun authenticationRequest() {
@@ -33,6 +45,9 @@ class ArticleFragment : Fragment() {
                 State.LoadingAllArticles -> {
                     binding.pbArticles.visibility = View.VISIBLE
                 }
+                is State.ObtainedUser -> {
+
+                }
                 is State.ObtainedArticles -> {
                     if(it.articles.isSuccessful) {
                         binding.pbArticles.visibility = View.GONE
@@ -44,6 +59,7 @@ class ArticleFragment : Fragment() {
                 }
                 is State.ObtainedToken -> {
                     it.token.let { token ->
+                        this.token = token
                         viewModel.getArticles(token!!)
                     }
                 }

@@ -24,7 +24,7 @@ class ProfileFragment: Fragment() {
     private val adapter by lazy { ArticlesListAdapter() }
     private val binding by lazy { FragmentProfileBinding.inflate(layoutInflater) }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?{
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         bindingObserver()
         viewModel.getActiveUser()
         bindingListeners()

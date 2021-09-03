@@ -3,6 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:layout_height="match_parent"
     tools:context=".ui.EditProfileActivity">
 
@@ -25,7 +27,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:background="@color/yellow"
-        android:title="Editar perfil"
+        android:title="@string/editar_perfil"
         android:titleTextColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_width="match_parent"
@@ -47,7 +49,7 @@
             android:id="@+id/iv_profile"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:src="@drawable/ic_profile_avatar" />
+            tools:src="@drawable/ic_profile_avatar" />
     </com.google.android.material.card.MaterialCardView>
 
     <TextView
@@ -56,7 +58,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cv_edit_profile"
-        android:text="Alterar foto do perfil"
+        android:text="@string/alterar_foto_do_perfil"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 

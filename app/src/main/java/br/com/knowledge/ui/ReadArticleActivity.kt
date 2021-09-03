@@ -1,10 +1,8 @@
 package br.com.knowledge.ui
 
-import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import br.com.knowledge.R
 import br.com.knowledge.core.extensions.createDialog
 import br.com.knowledge.core.extensions.createProgressDialog
 import br.com.knowledge.databinding.ActivityReadArticleBinding
@@ -30,10 +28,9 @@ class ReadArticleActivity : AppCompatActivity() {
         viewModel.getContentArticle(token, id)
     }
 
-    @SuppressLint("SetTextI18n")
     private fun initComponent(content: String) {
         binding.tvTitleArticle.text = intent.getStringExtra("title")
-        val text = "<html><body><p align=\"justify\">${content}</p></body></html>"
+        val text = "<html><head></head><body style=\"text-align:justify;\">${content}</body></html>"
         binding.tvContentArticle.loadData(text, "text/html", "utf-8")
     }
 
