@@ -14,6 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Knowleged">
         <activity
+            android:name=".ui.WriteArticleActivity"
+            android:windowSoftInputMode="stateVisible|adjustResize"
+            android:exported="true" />
+        <activity
             android:name=".ui.ReadArticleActivity"
             android:exported="true" />
         <activity
@@ -30,8 +34,8 @@
         </activity>
         <activity
             android:name=".ui.MainActivity"
-            android:windowSoftInputMode="stateHidden"
-            android:exported="true" />
+            android:exported="true"
+            android:windowSoftInputMode="stateHidden|adjustPan"/>
         <activity
             android:name=".ui.ForgotPasswordActivity"
             android:exported="true" />

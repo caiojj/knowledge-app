@@ -2,12 +2,8 @@ package br.com.knowledge.data.repository
 
 import br.com.knowledge.data.model.*
 import kotlinx.coroutines.flow.Flow
-import okhttp3.Authenticator
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
-import org.jetbrains.annotations.NotNull
 import retrofit2.Response
-
 
 interface KnowledgeRepository {
 
@@ -29,7 +25,7 @@ interface KnowledgeRepository {
 
     suspend fun getEmail() : Flow<List<String>>
 
-    suspend fun updateImageProfile(token: String, id: Long, image: MultipartBody.Part) : Flow<Response<ResponseUploadImage>>
+    suspend fun updateImageProfile(token: String, id: Long, file: MultipartBody.Part) : Flow<Response<ResponseUploadImage>>
 
     suspend fun updateUrl(url: String, id: Long)
 

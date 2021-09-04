@@ -28,7 +28,6 @@ class ProfileFragment: Fragment() {
         bindingObserver()
         viewModel.getActiveUser()
         bindingListeners()
-        viewModel.getToken()
         binding.rvMyArticles.adapter = adapter
         return binding.root
     }
@@ -69,7 +68,6 @@ class ProfileFragment: Fragment() {
         tvLogout?.setOnClickListener {
             viewModel.getEmail()
         }
-
         dialog.show()
     }
 

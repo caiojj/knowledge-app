@@ -5,5 +5,5 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "knowleged"
+rootProject.name = "knowledge"
 include(":app")

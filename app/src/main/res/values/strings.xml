@@ -28,4 +28,7 @@
     <string name="search">Pesquisar</string>
     <string name="editar_perfil">Editar perfil</string>
     <string name="alterar_foto_do_perfil">Alterar foto do perfil</string>
+    <string name="title">Titulo</string>
+    <string name="change_banner">Alterar banner</string>
+    <string name="publish">Publicar</string>
 </resources>
