@@ -20,7 +20,7 @@
                 android:id="@+id/iv_banner_article"
                 android:src="@mipmap/ic_android_10_foreground"
                 android:layout_width="match_parent"
-                android:layout_height="0.8in"
+                android:layout_height="1.2in"
                 tools:ignore="InOrMmUsage,Suspicious0dp" />
 
             <TextView
