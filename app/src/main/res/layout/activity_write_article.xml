@@ -7,28 +7,42 @@
     android:layout_height="match_parent"
     tools:context=".ui.WriteArticleActivity">
 
-    <ImageView
-        android:id="@+id/iv_write_article"
+    <ScrollView
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="H,16:9"
-        tools:src="@mipmap/ic_android_10_foreground"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <com.google.android.material.chip.Chip
-        android:layout_margin="10dp"
-        app:chipCornerRadius="2dp"
-        app:chipBackgroundColor="@color/yellow_low"
-        android:backgroundTint="@color/yellow_low"
-        android:textSize="10dp"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_write_article"
-        app:layout_constraintEnd_toEndOf="@+id/iv_write_article"
-        android:text="Alterar banner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
+            <ImageView
+                android:id="@+id/iv_write_article"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_width="match_parent"
+                app:layout_constraintDimensionRatio="H,16:9"
+                android:layout_height="0dp"
+                tools:src="@mipmap/ic_android_10_foreground"
+                />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/cp_change_banner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                app:layout_constraintEnd_toEndOf="@id/iv_write_article"
+                app:layout_constraintBottom_toBottomOf="@id/iv_write_article"
+                android:backgroundTint="@color/yellow_low"
+                android:text="@string/change_banner"
+                android:textColor="@color/white"
+                android:textSize="10dp"
+                app:chipBackgroundColor="@color/yellow_low"
+                app:chipCornerRadius="2dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
