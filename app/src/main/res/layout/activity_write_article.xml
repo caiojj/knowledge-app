@@ -7,17 +7,42 @@
     android:layout_height="match_parent"
     tools:context=".ui.WriteArticleActivity">
 
-    <ScrollView
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/tb_write_article"
+        app:titleTextColor="@color/white"
+        app:title="Titulo"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/yellow_low"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/cp_publish"
+        app:chipCornerRadius="2dp"
+        android:backgroundTint="@color/yellow_low"
+        android:textColor="@color/white"
+        android:layout_marginRight="8dp"
+        app:layout_constraintEnd_toEndOf="@id/tb_write_article"
+        app:layout_constraintTop_toTopOf="@id/tb_write_article"
+        app:layout_constraintBottom_toBottomOf="@id/tb_write_article"
+        android:text="@string/publish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <ScrollView
+        app:layout_constraintTop_toBottomOf="@id/tb_write_article"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="24dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <ImageView
                 android:id="@+id/iv_write_article"
@@ -43,6 +68,45 @@
                 android:textSize="10dp"
                 app:chipBackgroundColor="@color/yellow_low"
                 app:chipCornerRadius="2dp" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tie_title"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                app:layout_constraintTop_toBottomOf="@id/iv_write_article"
+                android:layout_marginTop="5dp"
+                android:padding="10dp"
+                android:hint="Titulo"
+                android:inputType="text"
+                android:textSize="16sp"
+                android:backgroundTint="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <com.google.android.material.textfield.TextInputEditText
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                app:layout_constraintTop_toBottomOf="@id/tie_title"
+                android:padding="5dp"
+                android:hint="Compartilhe seu conhecimento"
+                android:layout_marginTop="5dp"
+                android:inputType="textMultiLine"
+                android:id="@+id/tie_content"
+                android:textSize="16sp"
+                android:backgroundTint="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:menu="@menu/bottom_options_edit_text"
+        android:padding="0dp"
+        app:itemIconTint="@color/black"
+        app:labelVisibilityMode="unlabeled"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

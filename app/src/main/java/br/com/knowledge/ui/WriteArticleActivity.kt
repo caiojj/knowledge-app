@@ -8,6 +8,8 @@ import android.content.pm.PackageManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import androidx.core.widget.doOnTextChanged
 import br.com.knowledge.databinding.ActivityWriteArticleBinding
 
 class WriteArticleActivity : AppCompatActivity() {
@@ -26,6 +28,13 @@ class WriteArticleActivity : AppCompatActivity() {
                 PERMISSION_CODE_IMAGE_PICK,
                 Manifest.permission.READ_EXTERNAL_STORAGE) {
                 pickImageFromGallery()
+            }
+        }
+
+        binding.tieTitle.doOnTextChanged { text, _, _, count ->
+            binding.tbWriteArticle.title = text
+            if (count == 0) {
+                binding.tbWriteArticle.title = "Titulo"
             }
         }
     }
