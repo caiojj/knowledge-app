@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     kotlin("android")
     kotlin("kapt")
+    id("kotlin-android")
 }
 
 android {
@@ -12,7 +13,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "br.com.knowleged"
+        applicationId = "br.com.knowledge"
         minSdk = 21
         targetSdk = 31
         versionCode = 1

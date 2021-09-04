@@ -26,7 +26,7 @@
         android:id="@+id/tb_edit_profile"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:background="@color/yellow"
+        android:background="@color/yellow_low"
         android:title="@string/editar_perfil"
         android:titleTextColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
