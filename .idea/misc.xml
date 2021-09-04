@@ -31,7 +31,7 @@
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_read_article.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.5" />
-        <entry key="app/src/main/res/layout/activity_write_article.xml" value="0.7546468401486989" />
+        <entry key="app/src/main/res/layout/activity_write_article.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_article.xml" value="0.35837245696400627" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.22388059701492538" />
         <entry key="app/src/main/res/layout/fragment_write_article.xml" value="0.2109375" />

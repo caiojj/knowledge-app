@@ -21,6 +21,7 @@
     <com.google.android.material.chip.Chip
         android:layout_margin="10dp"
         app:chipCornerRadius="2dp"
+        app:chipBackgroundColor="@color/yellow_low"
         android:backgroundTint="@color/yellow_low"
         android:textSize="10dp"
         android:textColor="@color/white"
